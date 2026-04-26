@@ -32,8 +32,13 @@ public class GameData {
         return parseColour(props.getProperty("text.colour"));
     }
 
-    public Colour getBackgroundColour() {
-        return parseColour(props.getProperty("background.colour"));
+    public double[] getBackgroundColour() {
+        String[] p = props.getProperty("background.colour").split(",");
+        return new double[]{
+                Double.parseDouble(p[0].trim()),
+                Double.parseDouble(p[1].trim()),
+                Double.parseDouble(p[2].trim())
+        };
     }
 
 
@@ -95,9 +100,9 @@ public class GameData {
     private Colour parseColour(String csv) {
         String[] p = csv.split(",");
         return new Colour(
-                Double.parseDouble(p[0].trim()) / 255.0,
-                Double.parseDouble(p[1].trim()) / 255.0,
-                Double.parseDouble(p[2].trim()) / 255.0
+                Double.parseDouble(p[0].trim()),
+                Double.parseDouble(p[1].trim()),
+                Double.parseDouble(p[2].trim())
         );
     }
 
