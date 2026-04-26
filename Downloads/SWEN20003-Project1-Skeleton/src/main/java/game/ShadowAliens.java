@@ -34,8 +34,11 @@ public class ShadowAliens extends AbstractGame {
     }
 
     public static void main(String[] args) {
-        Properties gameProps = IOUtils.readPropertiesFile(System.getProperty("gameData"));
-        ShadowAliens game = new ShadowAliens(gameProps);
+        // Path from JVM arg, falls back to "gameData.properties" in working directory
+        String path = System.getProperty("gameData", "gameData.properties");
+        Properties props = IOUtils.readPropertiesFile(path);
+        ShadowAliens game = new ShadowAliens(props);
         game.run();
     }
 }
+
