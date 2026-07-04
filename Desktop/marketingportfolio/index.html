@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mohand's 3D Carousel Portfolio</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #0f0f0f;
+        color: #fff;
+        font-family: proxima-nova;
+        overflow-x: hidden;
+    }
+
+    h1, h2 {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    /* Smaller scene container */
+    .scene {
+        width: 100vw;
+        height: 50vh; /* reduced from 80vh */
+        perspective: 1200px;
+        margin-top: 20px;
+        position: relative;
+    }
+
+    /* Carousel wheel */
+    .carousel {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform-style: preserve-3d;
+        transition: transform 2.5s ease;
+    }
+
+    /* Smaller panels */
+    .panel {
+        position: absolute;
+        width: 40vw;   /* reduced from 60vw */ 
+        height: 35vh;  /* reduced from 60vh */
+        left: 30vw;    /* centered */ 
+        top: 5vh;
+        background: #1c1c1c;
+        border-radius: 40px;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        text-align: center;
+    }
+
+    .project {
+        background: #2a2a2a;
+        padding: 15px;
+        margin: 15px auto;
+        border-radius: 10px;
+        max-width: 400px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 16px;
+        margin-top: 10px;
+        background: #ff4f4f;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: 0.3s;
+        align-items: center;
+    }
+
+    .btn:hover {
+        background: #ff2a2a;
+    }
+
+    /* Navigation arrows */
+    .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 35px;
+        color: #fff;
+        cursor: pointer;
+        user-select: none;
+        padding: 10px;
+    }
+
+    .nav-left {
+        left: 20px;
+    }
+
+    .nav-right {
+        right: 20px;
+    }
+</style>
+</head>
+<body>
+
+<h1 style = "font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Mohand's Media Portfolio</h1>
+
+<!-- ========================= -->
+<!-- CANVA PROJECTS CAROUSEL -->
+<!-- ========================= -->
+
+<h2><span style = "text-decoration: underline;">Canva Projects</span></h2>
+<br> <br> 
+<br> <br> 
+
+
+<div class="scene">
+    <div class="carousel" id="carouselCanva">
+
+        <div class="panel" style="transform: rotateY(0deg) translateZ(400px);">
+            <div class="project">
+                <h2>WANTED</h2>
+                <p>Outfit inspiration video (Wild Wild West theme)</p>
+                <a class="btn" href="https://drive.google.com/file/d/1b0zZZ5IypJhnwg7M3VUygsn2pGcgTQVx/view" target="_blank">Watch Video</a>
+                <a class="btn" href="https://canva.link/ojavdq7ommvabkt" target="_blank">Canva File</a>
+            </div>
+        </div>
+
+        <div class="panel" style="transform: rotateY(120deg) translateZ(400px);">
+            <div class="project">
+                <h2>The Red String Of Fate</h2>
+                <p>Y2K / Dress in Red theme</p>
+                <a class="btn" href="https://drive.google.com/file/d/1HbYRFyphIvZqAqcJCm8Kpt4GWa7Nd6fk/view" target="_blank">Watch Video</a>
+                <a class="btn" href="https://canva.link/gcx8anvqrsicruh" target="_blank">Canva File</a>
+            </div>
+        </div>
+
+        <div class="panel" style="transform: rotateY(240deg) translateZ(400px);">
+            <div class="project">
+                <h2>City Of Stars</h2>
+                <p>La La Land theme</p>
+                <a class="btn" href="https://drive.google.com/file/d/1dzRos4lWecRKKfVa5sQ9RYd7F1hGfLaN/view" target="_blank">Watch Video</a>
+                <a class="btn" href="https://canva.link/85ah1p2419ejjow" target="_blank">Canva File</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="nav-btn nav-left" onclick="rotateCarousel('carouselCanva', -1)">‹</div>
+    <div class="nav-btn nav-right" onclick="rotateCarousel('carouselCanva', 1)">›</div>
+</div>
+
+<!-- ========================= -->
+<!-- CINEMATIC PROJECTS CAROUSEL -->
+<!-- ========================= -->
+<br> <br> 
+
+<h2>Cinematic Projects</h2>
+<br> <br> 
+<br> <br> 
+
+
+<div class="scene">
+    <div class="carousel" id="carouselCine">
+
+        <div class="panel" style="transform: rotateY(0deg) translateZ(400px);">
+            <div class="project">
+                <h2>Design Blitz Cinematic</h2>
+                <p>Hackathon teaser directed by me</p>
+                <a class="btn" href="https://www.instagram.com/reel/DWOea6kD5Cc/" target="_blank">Watch Cinematic</a>
+            </div>
+        </div>
+
+        <div class="panel" style="transform: rotateY(120deg) translateZ(400px);">
+            <div class="project">
+                <h2>Red String of Fate Cinematic</h2>
+                <p>Edited by me</p>
+                <a class="btn" href="https://www.instagram.com/reel/DQuKPVkks7E/" target="_blank">Watch Cinematic</a>
+            </div>
+        </div>
+
+        <div class="panel" style="transform: rotateY(240deg) translateZ(400px);">
+            <div class="project">
+                <h2>City of Stars Cinematic</h2>
+                <p>Featuring me</p>
+                <a class="btn" href="https://www.instagram.com/reel/DKcKf4AREgt/" target="_blank">Watch Cinematic</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="nav-btn nav-left" onclick="rotateCarousel('carouselCine', -1)">‹</div>
+    <div class="nav-btn nav-right" onclick="rotateCarousel('carouselCine', 1)">›</div>
+</div>
+
+<script>
+    const angles = {
+        carouselCanva: 0,
+        carouselCine: 0
+    };
+
+    function rotateCarousel(id, direction) {
+        angles[id] += direction * -120;
+        document.getElementById(id).style.transform = `rotateY(${angles[id]}deg)`;
+    }
+
+</script>
+
+</body>
+</html>
