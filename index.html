@@ -2,213 +2,500 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mohand's Portfolio</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohand Mender — Marketing &amp; Creative Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    body {
-        margin: 0;
-        background: #0f0f0f;
-        color: #fff;
-        font-family: proxima-nova;
-        overflow-x: hidden;
-    }
+  :root{
+    --ink: #0B0B0D;
+    --panel: #18181C;
+    --panel-line: #2B2B31;
+    --paper: #F3EFE6;
+    --muted: #9C978C;
+    --crimson: #C1443B;
+    --crimson-dim: #4a221e;
+    --gold: #D4A857;
+    --gold-dim: #4d3d20;
 
-    h1, h2 {
-        text-align: center;
-        margin-top: 40px;
-    }
+    --display: "Playfair Display", Georgia, serif;
+    --body: "Inter", -apple-system, sans-serif;
+    --mono: "Space Mono", "Courier New", monospace;
+  }
 
-    /* Smaller scene container */
-    .scene {
-        width: 100vw;
-        height: 50vh; /* reduced from 80vh */
-        perspective: 1200px;
-        margin-top: 20px;
-        position: relative;
-    }
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+  html{ scroll-behavior: smooth; }
 
-    /* Carousel wheel */
-    .carousel {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        transform-style: preserve-3d;
-        transition: transform 2.5s ease;
-    }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
+  }
 
-    /* Smaller panels */
-    .panel {
-        position: absolute;
-        width: 40vw;   /* reduced from 60vw */ 
-        height: 35vh;  /* reduced from 60vh */
-        left: 30vw;    /* centered */ 
-        top: 5vh;
-        background: #1c1c1c;
-        border-radius: 40px;
-        padding: 20px;
-        box-sizing: border-box;
-        overflow-y: auto;
-        text-align: center;
-    }
+  body{
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--body);
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
 
-    .project {
-        background: #2a2a2a;
-        padding: 15px;
-        margin: 15px auto;
-        border-radius: 10px;
-        max-width: 750px;
-    }
+  a{ color: inherit; }
 
-    .btn {
-        display: inline-block;
-        padding: 10px 16px;
-        margin-top: 10px;
-        background: #ff4f4f;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 6px;
-        transition: 0.3s;
-        align-items: center;
-    }
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
 
-    .btn:hover {
-        background: #ff2a2a;
-    }
+  /* ---------- nav ---------- */
+  .nav{
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.3rem clamp(1.5rem, 5vw, 4rem);
+    background: rgba(11,11,13,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .nav__mark{ font-family: var(--display); font-weight: 700; font-size: 1.2rem; }
+  .nav__links{ display: flex; gap: clamp(1rem, 3vw, 2.2rem); }
+  .nav__links a{
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none;
+    transition: color 0.25s ease;
+  }
+  .nav__links a:hover, .nav__links a:focus-visible{ color: var(--paper); }
 
-    /* Navigation arrows */
-    .nav-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 35px;
-        color: #fff;
-        cursor: pointer;
-        user-select: none;
-        padding: 10px;
-    }
+  /* ---------- hero ---------- */
+  .hero{
+    padding: 6.5rem clamp(1.5rem, 5vw, 4rem) 4rem;
+    max-width: 1200px;
+  }
+  .hero__title{
+    font-family: var(--display);
+    font-weight: 700;
+    font-style: italic;
+    font-size: clamp(2.8rem, 7.5vw, 5.5rem);
+    line-height: 1.04;
+    max-width: 16ch;
+  }
+  .hero__sub{
+    margin-top: 1.6rem;
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
 
-    .nav-left {
-        left: 20px;
-    }
+  /* ---------- stats strip ---------- */
+  .stats{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border-top: 1px solid var(--panel-line);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .stat{
+    padding: 2.4rem 1.5rem;
+    text-align: center;
+    border-left: 1px solid var(--panel-line);
+  }
+  .stat:first-child{ border-left: none; }
+  .stat__num{
+    font-family: var(--display); font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--gold);
+  }
+  .stat__label{
+    margin-top: 0.4rem;
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+  }
 
-    .nav-right {
-        right: 20px;
-    }
+  /* ---------- about ---------- */
+  .about{
+    padding: 5.5rem clamp(1.5rem, 5vw, 4rem);
+    max-width: 900px;
+  }
+  .about__title{
+    font-family: var(--display); font-weight: 600; font-size: clamp(1.9rem, 4vw, 2.6rem);
+    margin-bottom: 1.4rem;
+  }
+  .about p{ color: var(--muted); font-size: 1.02rem; max-width: 65ch; }
+  .about p + p{ margin-top: 1rem; }
+
+  /* ---------- section shells ---------- */
+  .section{
+    padding: 5rem clamp(1.5rem, 5vw, 4rem) 6rem;
+    border-top: 1px solid var(--panel-line);
+  }
+  .section__head{ display: flex; align-items: flex-start; gap: 1.4rem; margin-bottom: 0.6rem; }
+  .section__title{ font-family: var(--display); font-weight: 600; font-size: clamp(2rem, 4.5vw, 3rem); }
+  .section__desc{ color: var(--muted); max-width: 56ch; margin: 0.6rem 0 3rem; }
+
+  .marker{ flex-shrink: 0; margin-top: 0.35rem; }
+  .marker.gold-marker span{ background: var(--gold); }
+  .swatch-marker{ display:flex; border-radius: 999px; overflow: hidden; box-shadow: 0 0 0 1px var(--panel-line); }
+  .swatch-marker span{ width: 10px; height: 30px; }
+  .swatch-marker span:nth-child(1){ background:#D4A857; }
+  .swatch-marker span:nth-child(2){ background:#C1443B; }
+  .swatch-marker span:nth-child(3){ background:#7B7FBF; }
+
+  .clapper-marker{ width: 38px; height: 30px; }
+  .clapper{ width: 100%; height: 100%; position: relative; }
+  .clapper__top{
+    position: absolute; top: 0; left: 0; width: 100%; height: 10px;
+    background: repeating-linear-gradient(115deg, var(--paper) 0 6px, var(--ink) 6px 12px);
+    border-radius: 2px 2px 0 0;
+  }
+  .clapper__base{
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 18px;
+    background: var(--ink); border: 1px solid var(--panel-line); border-radius: 0 0 2px 2px;
+  }
+
+  /* ---------- 3D carousel ---------- */
+  .scene{
+    width: 100%;
+    height: 56vh;
+    min-height: 420px;
+    perspective: 1400px;
+    position: relative;
+    margin-top: 1rem;
+  }
+  .carousel{
+    width: 100%; height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(.65,0,.35,1);
+  }
+  .panel{
+    position: absolute;
+    width: min(78vw, 380px);
+    height: min(50vh, 430px);
+    /* centered by construction: same min() expression halved, so the
+       branch chosen for width always matches the branch chosen for the
+       offset — no mismatch between the two like a separate calc could cause */
+    left: calc(50% - (min(78vw, 380px) / 2));
+    top: calc(50% - (min(50vh, 430px) / 2));
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-align: left;
+    backface-visibility: hidden;
+  }
+  .panel__bar{ height: 8px; width: 100%; flex-shrink: 0; }
+  .panel__body{ padding: 1.7rem 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
+  .panel__index{ font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--muted); }
+  .panel__title{ font-family: var(--display); font-weight: 600; font-size: 1.45rem; }
+  .panel__desc{ color: var(--muted); font-size: 0.95rem; flex: 1; }
+  .panel__actions{ display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 0.4rem; }
+
+  .btn{
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.6rem 1.1rem;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid var(--panel-line);
+    color: var(--paper);
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); }
+  .btn--primary{ background: var(--crimson); border-color: var(--crimson); color: #fff; }
+  .btn--primary:hover{ background: #a83a32; }
+  .btn--ghost:hover{ border-color: var(--gold); color: var(--gold); }
+
+  .nav-btn{
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: var(--paper);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--panel-line);
+    cursor: pointer; user-select: none; z-index: 5;
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+  .nav-btn:hover{ border-color: var(--gold); color: var(--gold); }
+  .nav-left{ left: clamp(0.5rem, 3vw, 2rem); }
+  .nav-right{ right: clamp(0.5rem, 3vw, 2rem); }
+
+  .dots{ display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.6rem; }
+  .dot{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--panel-line);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .dot.is-active{ background: var(--gold); transform: scale(1.3); }
+
+  /* theme accent bars per project */
+  .bar--wanted{ background: linear-gradient(90deg,#B9803B,#D4A857); }
+  .bar--redstring{ background: linear-gradient(90deg,#C1443B,#E06D8C); }
+  .bar--citystars{ background: linear-gradient(90deg,#2F3A6B,#D4A857); }
+
+  /* ---------- footer ---------- */
+  .footer{
+    padding: 3.2rem clamp(1.5rem, 5vw, 4rem) 3rem;
+    border-top: 1px solid var(--panel-line);
+  }
+  .footer__row{
+    display: flex; flex-wrap: wrap; gap: 1rem 2rem;
+    align-items: baseline; justify-content: space-between;
+  }
+  .footer__name{ font-family: var(--display); font-weight: 600; font-size: 1.25rem; }
+  .footer__links{ display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer__links a{
+    font-family: var(--mono); font-size: 0.75rem; color: var(--muted); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .footer__links a:hover{ color: var(--paper); border-color: var(--paper); }
+  .footer__note{ margin-top: 1.2rem; color: var(--muted); font-size: 0.82rem; }
+
+  a:focus-visible, .nav-btn:focus-visible, .dot:focus-visible{
+    outline: 2px solid var(--gold); outline-offset: 3px;
+  }
+
+  /* ---------- mobile fallback: stack instead of 3D ---------- */
+  @media (max-width: 720px){
+    .stat{ border-left: none; border-top: 1px solid var(--panel-line); }
+    .stat:first-child{ border-top: none; }
+  }
 </style>
 </head>
 <body>
 
-<h1 style = "font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Mohand's Media Portfolio</h1>
-<br> <br> 
-<h2></h2>
+<nav class="nav">
+  <a href="#top" class="nav__mark">MM</a>
+  <div class="nav__links">
+    <a href="#about">About</a>
+    <a href="#canva">Canva Projects</a>
+    <a href="#cinematic">Cinematic Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-    <div style = "background-color: #ff4f4f" class="project">
-        <h2 style = "font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">About My Work</h2>
-        <p style = "font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">I designed and developed high-quality graphic materials. I also directed and edited multiple cinematics, and starred in one of them.
-            Through these experiences I improved my editing skills, whether its on Canva or Capcut, to create visually appealing projects. My strong understanding of cinematic techniques and storytelling 
-            allows me to create compelling narratives that captivate audiences. My portfolio showcases my ability to create engaging content that resonates with audiences,
-            and attracts people to the intended product or message. 
-        </p>
+<header class="hero" id="top">
+  <p class="eyebrow">MARKETING &amp; CREATIVE PORTFOLIO</p>
+  <h1 class="hero__title">Concept to campaign.</h1>
+  <p class="hero__sub">Themed lookbooks, short-form video and brand content — designed, directed and edited end to end, built to catch a scroll and hold it.</p>
+</header>
+
+<section class="stats">
+  <div class="stat">
+    <p class="stat__num">150K+</p>
+    <p class="stat__label">Video views</p>
+  </div>
+  <div class="stat">
+    <p class="stat__num">20K+</p>
+    <p class="stat__label">Instagram interactions</p>
+  </div>
+  <div class="stat">
+    <p class="stat__num">+20%</p>
+    <p class="stat__label">Club registration growth</p>
+  </div>
+  <div class="stat">
+    <p class="stat__num">6</p>
+    <p class="stat__label">Person team led</p>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <p class="eyebrow">ABOUT THE WORK</p>
+  <h2 class="about__title">Design that's built to be seen.</h2>
+  <p>I design graphic content and direct short-form video — from concept and storyboard through to final edit. Recent work spans themed lookbook campaigns in Canva and cinematic reels edited in CapCut, several of which I also directed and appeared in.</p>
+  <p>The throughline across both is storytelling: strong visual concepts, a clear narrative, and content built to stop the scroll and hold attention long enough to land the message.</p>
+</section>
+
+<main>
+
+  <section class="section" id="canva">
+    <div class="section__head">
+      <div class="marker swatch-marker" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div>
+        <p class="eyebrow">01 — GRAPHIC DESIGN &amp; DIRECTION</p>
+        <h2 class="section__title">Canva Projects</h2>
+      </div>
     </div>
+    <p class="section__desc">A themed outfit-inspiration series — concept, styling and design in Canva, each paired with a directed video.</p>
 
-<!-- ========================= -->
-<!-- CANVA PROJECTS CAROUSEL -->
-<!-- ========================= -->
-
-<h2 style = "text-decoration: underline; font-size: xx-large;background-color: #320032;">Canva Projects</h2>
-<br> <br> 
-<br> <br> 
-
-
-<div class="scene">
-    <div class="carousel" id="carouselCanva">
-
+    <div class="scene">
+      <div class="carousel" id="carouselCanva">
         <div class="panel" style="transform: rotateY(0deg) translateZ(400px);">
-            <div class="project">
-                <h2>WANTED</h2>
-                <p>Outfit inspiration video Wild Wild West theme</p>
-                <a class="btn" href="https://drive.google.com/file/d/1b0zZZ5IypJhnwg7M3VUygsn2pGcgTQVx/view" target="_blank">Watch Video</a>
-                <a class="btn" href="https://canva.link/ojavdq7ommvabkt" target="_blank">Canva File</a>
+          <div class="panel__bar bar--wanted"></div>
+          <div class="panel__body">
+            <span class="panel__index">LOOK 01 — WILD WILD WEST</span>
+            <h3 class="panel__title">WANTED</h3>
+            <p class="panel__desc">Outfit inspiration video built around a Wild West theme — rugged tones, western silhouettes, and a dead-or-alive poster concept.</p>
+            <div class="panel__actions">
+              <a class="btn btn--primary" href="https://drive.google.com/file/d/1b0zZZ5IypJhnwg7M3VUygsn2pGcgTQVx/view" target="_blank" rel="noopener">Watch Video</a>
+              <a class="btn btn--ghost" href="https://canva.link/ojavdq7ommvabkt" target="_blank" rel="noopener">Canva File</a>
             </div>
+          </div>
         </div>
 
         <div class="panel" style="transform: rotateY(120deg) translateZ(400px);">
-            <div class="project">
-                <h2>The Red String Of Fate</h2>
-                <p>Outfit inspiration video Y2K / Dress in Red theme</p>
-                <a class="btn" href="https://drive.google.com/file/d/1HbYRFyphIvZqAqcJCm8Kpt4GWa7Nd6fk/view" target="_blank">Watch Video</a>
-                <a class="btn" href="https://canva.link/gcx8anvqrsicruh" target="_blank">Canva File</a>
+          <div class="panel__bar bar--redstring"></div>
+          <div class="panel__body">
+            <span class="panel__index">LOOK 02 — Y2K / RED</span>
+            <h3 class="panel__title">The Red String Of Fate</h3>
+            <p class="panel__desc">Outfit inspiration video in a Y2K palette, styled entirely in red — built around the idea of a thread connecting fate and fashion.</p>
+            <div class="panel__actions">
+              <a class="btn btn--primary" href="https://drive.google.com/file/d/1HbYRFyphIvZqAqcJCm8Kpt4GWa7Nd6fk/view" target="_blank" rel="noopener">Watch Video</a>
+              <a class="btn btn--ghost" href="https://canva.link/gcx8anvqrsicruh" target="_blank" rel="noopener">Canva File</a>
             </div>
+          </div>
         </div>
 
         <div class="panel" style="transform: rotateY(240deg) translateZ(400px);">
-            <div class="project">
-                <h2>City Of Stars</h2>
-                <p>Outfit inspiration video La La Land theme</p>
-                <a class="btn" href="https://drive.google.com/file/d/1dzRos4lWecRKKfVa5sQ9RYd7F1hGfLaN/view" target="_blank">Watch Video</a>
-                <a class="btn" href="https://canva.link/85ah1p2419ejjow" target="_blank">Canva File</a>
+          <div class="panel__bar bar--citystars"></div>
+          <div class="panel__body">
+            <span class="panel__index">LOOK 03 — LA LA LAND</span>
+            <h3 class="panel__title">City Of Stars</h3>
+            <p class="panel__desc">Outfit inspiration video inspired by La La Land — golden-hour tones and old-Hollywood styling.</p>
+            <div class="panel__actions">
+              <a class="btn btn--primary" href="https://drive.google.com/file/d/1dzRos4lWecRKKfVa5sQ9RYd7F1hGfLaN/view" target="_blank" rel="noopener">Watch Video</a>
+              <a class="btn btn--ghost" href="https://canva.link/85ah1p2419ejjow" target="_blank" rel="noopener">Canva File</a>
             </div>
+          </div>
         </div>
+      </div>
 
+      <div class="nav-btn nav-left" role="button" tabindex="0" aria-label="Previous Canva project" onclick="rotateCarousel('carouselCanva', -1)">‹</div>
+      <div class="nav-btn nav-right" role="button" tabindex="0" aria-label="Next Canva project" onclick="rotateCarousel('carouselCanva', 1)">›</div>
     </div>
+    <div class="dots" id="dotsCanva"></div>
+  </section>
 
-    <div class="nav-btn nav-left" onclick="rotateCarousel('carouselCanva', -1)">‹</div>
-    <div class="nav-btn nav-right" onclick="rotateCarousel('carouselCanva', 1)">›</div>
-</div>
+  <section class="section" id="cinematic">
+    <div class="section__head">
+      <div class="marker clapper-marker" aria-hidden="true">
+        <div class="clapper"><div class="clapper__top"></div><div class="clapper__base"></div></div>
+      </div>
+      <div>
+        <p class="eyebrow">02 — VIDEO &amp; DIRECTION</p>
+        <h2 class="section__title">Cinematic Projects</h2>
+      </div>
+    </div>
+    <p class="section__desc">Directed and edited short-form cinematics — from a hackathon teaser to narrative reels built around the same lookbook themes.</p>
 
-<!-- ========================= -->
-<!-- CINEMATIC PROJECTS CAROUSEL -->
-<!-- ========================= -->
-<br> <br> 
-
-<h2 style = "text-decoration: underline; font-size: xx-large; background-color: #320032;">Cinematic Projects</h2>
-<br> <br> 
-<br> <br> 
-
-<div class="scene">
-    <div class="carousel" id="carouselCine">
-
+    <div class="scene">
+      <div class="carousel" id="carouselCine">
         <div class="panel" style="transform: rotateY(0deg) translateZ(400px);">
-            <div class="project">
-                <h2>Design Blitz Cinematic</h2>
-                <p>Hackathon teaser directed by me</p>
-                <a class="btn" href="https://www.instagram.com/reel/DWOea6kD5Cc/" target="_blank">Watch Cinematic</a>
+          <div class="panel__bar bar--citystars"></div>
+          <div class="panel__body">
+            <span class="panel__index">FILM 01 — DIRECTED</span>
+            <h3 class="panel__title">Design Blitz Cinematic</h3>
+            <p class="panel__desc">Hackathon teaser I directed — storyboarded, shot and edited to build hype ahead of the event.</p>
+            <div class="panel__actions">
+              <a class="btn btn--primary" href="https://www.instagram.com/reel/DWOea6kD5Cc/" target="_blank" rel="noopener">Watch Cinematic</a>
             </div>
+          </div>
         </div>
 
         <div class="panel" style="transform: rotateY(120deg) translateZ(400px);">
-            <div class="project">
-                <h2>Red String of Fate Cinematic</h2>
-                <p>Edited by me</p>
-                <a class="btn" href="https://www.instagram.com/reel/DQuKPVkks7E/" target="_blank">Watch Cinematic</a>
+          <div class="panel__bar bar--redstring"></div>
+          <div class="panel__body">
+            <span class="panel__index">FILM 02 — EDITED</span>
+            <h3 class="panel__title">Red String of Fate Cinematic</h3>
+            <p class="panel__desc">The cinematic companion to the Y2K lookbook — edited to match its mood and pacing.</p>
+            <div class="panel__actions">
+              <a class="btn btn--primary" href="https://www.instagram.com/reel/DQuKPVkks7E/" target="_blank" rel="noopener">Watch Cinematic</a>
             </div>
+          </div>
         </div>
 
         <div class="panel" style="transform: rotateY(240deg) translateZ(400px);">
-            <div class="project">
-                <h2>City of Stars Cinematic</h2>
-                <p>Featuring me</p>
-                <a class="btn" href="https://www.instagram.com/reel/DKcKf4AREgt/" target="_blank">Watch Cinematic</a>
+          <div class="panel__bar bar--wanted"></div>
+          <div class="panel__body">
+            <span class="panel__index">FILM 03 — FEATURING ME</span>
+            <h3 class="panel__title">City of Stars Cinematic</h3>
+            <p class="panel__desc">The narrative companion to the La La Land lookbook, featuring me on screen.</p>
+            <div class="panel__actions">
+              <a class="btn btn--primary" href="https://www.instagram.com/reel/DKcKf4AREgt/" target="_blank" rel="noopener">Watch Cinematic</a>
             </div>
+          </div>
         </div>
+      </div>
 
+      <div class="nav-btn nav-left" role="button" tabindex="0" aria-label="Previous cinematic project" onclick="rotateCarousel('carouselCine', -1)">‹</div>
+      <div class="nav-btn nav-right" role="button" tabindex="0" aria-label="Next cinematic project" onclick="rotateCarousel('carouselCine', 1)">›</div>
     </div>
+    <div class="dots" id="dotsCine"></div>
+  </section>
 
-    <div class="nav-btn nav-left" onclick="rotateCarousel('carouselCine', -1)">‹</div>
-    <div class="nav-btn nav-right" onclick="rotateCarousel('carouselCine', 1)">›</div>
-</div>
+</main>
+
+<footer class="footer" id="contact">
+  <div class="footer__row">
+    <p class="footer__name">Mohand Mender</p>
+    <div class="footer__links">
+      <a href="mailto:mendermohand@gmail.com">mendermohand@gmail.com</a>
+      <a href="tel:0470219151">0470 219 151</a>
+      <a href="https://www.linkedin.com/in/mohand-mender-58a8611b1/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  <p class="footer__note">Marketing Director, CISSA — University of Melbourne</p>
+</footer>
 
 <script>
-    const angles = {
-        carouselCanva: 0,
-        carouselCine: 0
-    };
+  const counts = { carouselCanva: 3, carouselCine: 3 };
+  const angles = { carouselCanva: 0, carouselCine: 0 };
 
-    function rotateCarousel(id, direction) {
-        angles[id] += direction * -120;
-        document.getElementById(id).style.transform = `rotateY(${angles[id]}deg)`;
+  function buildDots(id, dotsId){
+    const wrap = document.getElementById(dotsId);
+    for(let i = 0; i < counts[id]; i++){
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' is-active' : '');
+      d.setAttribute('role','button');
+      d.setAttribute('tabindex','0');
+      d.setAttribute('aria-label','Go to slide ' + (i+1));
+      d.addEventListener('click', () => goToSlide(id, dotsId, i));
+      wrap.appendChild(d);
     }
+  }
 
+  function updateDots(id, dotsId){
+    const step = 360 / counts[id];
+    const index = (((-angles[id] / step) % counts[id]) + counts[id]) % counts[id];
+    const dots = document.getElementById(dotsId).children;
+    for(let i = 0; i < dots.length; i++){
+      dots[i].classList.toggle('is-active', Math.round(index) === i);
+    }
+  }
+
+  function applyRotation(id){
+    document.getElementById(id).style.transform = `rotateY(${angles[id]}deg)`;
+  }
+
+  function rotateCarousel(id, direction){
+    const step = 360 / counts[id];
+    angles[id] += direction * -step;
+    applyRotation(id);
+    const dotsId = id === 'carouselCanva' ? 'dotsCanva' : 'dotsCine';
+    updateDots(id, dotsId);
+  }
+
+  function goToSlide(id, dotsId, index){
+    const step = 360 / counts[id];
+    angles[id] = -index * step;
+    applyRotation(id);
+    updateDots(id, dotsId);
+  }
+
+  buildDots('carouselCanva', 'dotsCanva');
+  buildDots('carouselCine', 'dotsCine');
+
+  // keyboard support for nav arrows
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); btn.click(); }
+    });
+  });
 </script>
 
 </body>
